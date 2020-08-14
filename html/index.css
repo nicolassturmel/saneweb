@@ -1,0 +1,70 @@
+#container {    
+    display: grid;
+    width: 500px;
+    margin: auto;
+    color: white;
+    background-color: gray;
+    text-align: center;
+    padding: 20px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "devices options"
+    "scanbutton scanbutton"
+    "results results";
+}
+
+#devices {
+    grid-area: devices;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+img {
+    width : 450px;
+    height: auto
+}
+
+#scanbutton {
+    grid-area: scanbutton;
+    border: 1px white solid;
+    margin: 30px;
+}
+
+#options {
+    grid-area: options;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+#results {
+    grid-area: results;
+}
+
+.selected {
+    background-color: blueviolet;
+}
+
+.options-cont {
+    width: 130px;
+    position: relative;
+}
+
+.option-name {
+    width: 80px;
+    float: left;
+    text-align: left;
+}
+
+.option-select {
+    width: 50px;
+    float: right;
+    text-align: right;
+}
+
+.option-input {
+    width: 50px;
+    float: right;
+    text-align: right;
+}
