@@ -27,10 +27,10 @@ window.onload = () => {
         })
     }
     document.getElementById("group").onclick = () => {
-        let args = []
+        let args = ""
         let filename = document.getElementById("configuration-filename").value || (Date.now()+ ".pdf")
         filesList.forEach((f, id) => {
-            args.push("&file" + id + "=" + f )
+            args += "&file" + id + "=" + f 
         })
         fetch("/group?&destination=" + filename  + args)
 	    .then(response => response.json())
