@@ -1,7 +1,7 @@
 var fs = require('fs');
 const path = require('path');
 var http = require('http');
-var sane = require('sane-scanimage-wrapper');
+var sane = require('./sane-wrapper.js');
 const { v4: uuidv4 } = require('uuid');
 var express = require('express');
 
