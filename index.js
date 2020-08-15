@@ -46,6 +46,13 @@ app.get("/options", (req,res) => {
 	scanner.infos().then(l => res.send(l))
 })
 
+app.get("/files", (req,res) => {
+	const directoryPath = path.join(__dirname, 'html/scans');
+	fs.readdir(directoryPath, function (err, files) {
+		res.send(files)
+	})
+})
+
 var httpServer = http.createServer(app);
 
 sane.listDevices().then(

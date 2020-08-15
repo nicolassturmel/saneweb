@@ -1,17 +1,31 @@
 #container {    
     display: grid;
-    width: 500px;
+    min-width: 500px;
+    max-width: 800px;
     margin: auto;
     color: white;
     background-color: gray;
     text-align: center;
     padding: 20px;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto 1fr 45px auto;
     grid-template-areas: 
-    "devices options"
-    "scanbutton scanbutton"
-    "results results";
+    "files devices options"
+    "files configuration options"
+    "files scanbutton scanbutton"
+    "files results results";
+}
+
+#files {
+    grid-area: files;
+    text-align: left;
+}
+
+#configuration {
+    grid-area: configuration;
+    text-align: left;
+    margin: 10px;
+    bottom: 0;
 }
 
 #devices {
@@ -22,13 +36,16 @@
 
 img {
     width : 450px;
-    height: auto
+    height: auto;
+    margin: auto;
 }
 
 #scanbutton {
     grid-area: scanbutton;
     border: 1px white solid;
-    margin: 30px;
+    height: 25px;
+    line-height: 25px;
+    margin: 10px;
 }
 
 #options {
@@ -42,6 +59,15 @@ img {
     grid-area: results;
 }
 
+.file {
+    height: 20px;
+    line-height: 20px;
+}
+
+.del {
+    color: red;
+    margin-left: 20px;
+}
 .selected {
     background-color: blueviolet;
 }

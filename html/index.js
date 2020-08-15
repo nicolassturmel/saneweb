@@ -1,8 +1,9 @@
 var selectedDevice = 0
 var options = []
+var filesList = []
 
 window.onload = () => {
-
+    listFiles()
     document.getElementById("devices").innerHTML = "Searching network..."
     document.getElementById("scanbutton").onclick = () => {
         let i = document.getElementById("results")
@@ -21,11 +22,49 @@ window.onload = () => {
             let im = document.createElement("img")
             im.src = response.file
             i.appendChild(im)
+            listFiles()
         })
     }
 }
 
-var deviceSelected = () => {
+var listFiles = () => {
+    let cont = document.getElementById("files")
+    cont.innerHTML = ""
+    let namef = document.createElement("span")
+    namef.innerHTML = "Current files"
+    cont.appendChild(namef)
+    fetch("/files")
+	.then(response => response.json())
+    .then(response => {
+        response.forEach(f => {
+            let fn = document.createElement("div")
+            fn.className = "file"
+            fn.id = "file-" + f;
+            let namef = document.createElement("span")
+            namef.innerHTML = f
+            fn.appendChild(namef)
+            let del = document.createElement("span")
+            del.innerHTML = " X"
+            del.className = "del"
+            fn.appendChild(del)
+            cont.appendChild(fn)
+            fn.onclick = () => {
+                if(!filesList.includes(f)) {
+                    filesList.push(f)
+                    fn.classList.add("selected")
+                }
+                else {
+                    filesList.splice(filesList.indexOf(f),1)
+                    fn.classList.remove("selected")
+                }
+            }
+            if(filesList.includes(f)) fn.classList.add("selected")
+        })
+    })
+}
+
+var deviceSelected = (test) => {
+    console.log(test)
     fetch("/options?device=" + selectedDevice)
 	.then(response => response.json())
         .then(response => {
@@ -72,6 +111,7 @@ fetch("/listdevices")
 .then(a => { 
     let c = document.getElementById("devices")
     c.innerHTML = ""
+    a = [{ name: "testA"},{ name: "testB"}]
     if(a.length == 0) {
         let d = document.createElement("div")
         d.innerHTML = "Is the printer powered ?"
@@ -85,6 +125,19 @@ fetch("/listdevices")
             d.className = "device"
             d.id = "device" + index
             d._data = {index: index}
+            d.onclick = () => {
+                let items = document.querySelectorAll(".device")
+                items.forEach(it => {
+                    if(it._data.index == index)
+                        it.classList.add("selected")
+                    else
+                        it.classList.remove("selected")
+                })
+                if(index != selectedDevice) {
+                    selectedDevice = index
+                    deviceSelected(selectedDevice)
+                }
+            }
             c.appendChild(d)
         });
         document.getElementById("device0").classList.add("selected")
@@ -94,3 +147,4 @@ fetch("/listdevices")
 
 
 })
+

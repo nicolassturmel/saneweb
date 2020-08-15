@@ -4,9 +4,13 @@
 </head>
 <body>
     <div id=container>
+        <div id=files></div>
         <div id=devices></div>
         <div id=options></div>
-        <div id=configuration></div>
+        <div id=configuration>
+            <div><span>filename :</span><input id="configuration-filename"></div>
+            <div><span>%d for current date YYYY-MM-DD<br>%i for increment<br>next value </span><input id="configuration-increment"></div>
+        </div>
         <div id=scanbutton>Scan</div>
         <div id=results></div>
     </div>
