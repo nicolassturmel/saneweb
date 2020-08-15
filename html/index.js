@@ -14,8 +14,9 @@ window.onload = () => {
             if(v && v.value != o.default)
                 args += "&" + o.name + "=" + v.value
         })
-        fetch("/scannow?device=" + selectedDevice + "&file=" + Date.now() + ".jpg" + args)
-	.then(response => response.json())
+        let filename = document.getElementById("configuration-filename").value || (Date.now()+ ".jpg")
+        fetch("/scannow?device=" + selectedDevice + "&file=" + filename  + args)
+	    .then(response => response.json())
         .then(response => {
             let i = document.getElementById("results")
             i.innerHTML = ""
@@ -25,30 +26,65 @@ window.onload = () => {
             listFiles()
         })
     }
+    document.getElementById("group").onclick = () => {
+        let args = []
+        let filename = document.getElementById("configuration-filename").value || (Date.now()+ ".pdf")
+        filesList.forEach((f, id) => {
+            args.push("&file" + id + "=" + f )
+        })
+        fetch("/group?&destination=" + filename  + args)
+	    .then(response => response.json())
+        .then(response => {
+            listFiles
+        })
+    }
+    document.getElementById("configuration-increment").onchange = () => {
+        listFiles(document.getElementById("configuration-increment").value)
+    }
+
 }
 
-var listFiles = () => {
+var listFiles = (inc,deleteF) => {
+    let args = ""
+    if(inc)
+        args += "?increment=" + document.getElementById("configuration-increment").value
+    if(deleteF)
+        args += "?delete=" + deleteF
+
     let cont = document.getElementById("files")
     cont.innerHTML = ""
     let namef = document.createElement("span")
-    namef.innerHTML = "Current files"
+    namef.innerHTML = "Current files<br>--"
     cont.appendChild(namef)
-    fetch("/files")
+    fetch("/files" + args)
 	.then(response => response.json())
     .then(response => {
-        response.forEach(f => {
+        response.files.forEach(f => {
             let fn = document.createElement("div")
             fn.className = "file"
             fn.id = "file-" + f;
             let namef = document.createElement("span")
+            namef.className = "fileName"
             namef.innerHTML = f
             fn.appendChild(namef)
+            let show = document.createElement("span")
+            show.innerHTML = "🔎"
+            show.className = "showPic"
+            show.onclick = () => { 
+                let i = document.getElementById("results")
+                i.innerHTML = ""
+                let im = document.createElement("img")
+                im.src = "./scans/" + f
+                i.appendChild(im)
+             }
+             fn.appendChild(show)
             let del = document.createElement("span")
             del.innerHTML = " X"
             del.className = "del"
+            del.onclick = () => { console.log("Delete",f) ; listFiles(null,f) }
             fn.appendChild(del)
             cont.appendChild(fn)
-            fn.onclick = () => {
+            namef.onclick = () => {
                 if(!filesList.includes(f)) {
                     filesList.push(f)
                     fn.classList.add("selected")
@@ -60,6 +96,7 @@ var listFiles = () => {
             }
             if(filesList.includes(f)) fn.classList.add("selected")
         })
+        document.getElementById("configuration-increment").value = response.increment
     })
 }
 
@@ -111,7 +148,6 @@ fetch("/listdevices")
 .then(a => { 
     let c = document.getElementById("devices")
     c.innerHTML = ""
-    a = [{ name: "testA"},{ name: "testB"}]
     if(a.length == 0) {
         let d = document.createElement("div")
         d.innerHTML = "Is the printer powered ?"

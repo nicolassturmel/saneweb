@@ -8,12 +8,13 @@
     text-align: center;
     padding: 20px;
     grid-template-columns: 1fr auto auto;
-    grid-template-rows: auto 1fr 45px auto;
+    grid-template-rows: auto 1fr 45px auto 45px;
     grid-template-areas: 
     "files devices options"
     "files configuration options"
     "files scanbutton scanbutton"
-    "files results results";
+    "files results results"
+    "group results results";
 }
 
 #files {
@@ -28,6 +29,13 @@
     bottom: 0;
 }
 
+#group {
+    grid-area: group;
+    line-height: 25px;
+    margin: 10px;
+    border: 1px white solid;
+}
+
 #devices {
     grid-area: devices;
     margin-left: 20px;
@@ -35,7 +43,7 @@
 }
 
 img {
-    width : 450px;
+    width : 90%;
     height: auto;
     margin: auto;
 }
@@ -59,14 +67,34 @@ img {
     grid-area: results;
 }
 
+#configuration-increment {
+    width: 40px;
+}
+
 .file {
+    display: grid;
     height: 20px;
     line-height: 20px;
+    grid-template-columns: auto 20px 20px;
+    grid-template-rows:  1fr;
+    grid-template-areas: 
+    "fileName showPic del"
+}
+
+.fileName {
+    grid-area: fileName;
+    min-width: 30px;
+    overflow: hidden;
+    white-space: pre;
 }
 
 .del {
+    grid-area: del;
     color: red;
-    margin-left: 20px;
+}
+
+.showPic {
+    grid-area: showPic;
 }
 .selected {
     background-color: blueviolet;
