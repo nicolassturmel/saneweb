@@ -63,7 +63,7 @@ var listFiles = (inc,deleteF) => {
             let fn = document.createElement("div")
             fn.className = "file"
             fn.id = "file-" + f;
-            let namef = document.createElement("span")
+            let namef = document.createElement("div")
             namef.className = "fileName"
             namef.innerHTML = f
             fn.appendChild(namef)
@@ -78,6 +78,11 @@ var listFiles = (inc,deleteF) => {
                 i.appendChild(im)
              }
              fn.appendChild(show)
+             let get = document.createElement("a")
+             get.innerHTML = "📤"
+             get.href = "./scans/" + f
+             get.className = "getFile"
+              fn.appendChild(get)
             let del = document.createElement("span")
             del.innerHTML = " X"
             del.className = "del"

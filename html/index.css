@@ -1,23 +1,39 @@
-#container {    
-    display: grid;
-    min-width: 500px;
-    max-width: 800px;
+#container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
     margin: auto;
     color: white;
     background-color: gray;
     text-align: center;
-    padding: 20px;
+    width: 100%;
+    min-width: 400px;
+    max-width: 700px;
+}
+
+
+#inner2 {    
+    display: grid;
+    min-width: 400px;
     grid-template-columns: 1fr auto auto;
     grid-template-rows: auto 1fr 45px auto 45px;
     grid-template-areas: 
-    "files devices options"
-    "files configuration options"
-    "files scanbutton scanbutton"
-    "files results results"
-    "group results results";
+    "devices options"
+    "configuration options"
+    "scanbutton scanbutton"
+    "results results"
+    "results results";
+    margin-bottom: 40px;
+}
+
+#inner1 {
+    display: grid;
+    min-width: 200px;
+    width: 100%;
 }
 
 #files {
+    width: 100%;
     grid-area: files;
     text-align: left;
 }
@@ -43,7 +59,7 @@
 }
 
 img {
-    width : 90%;
+    width : 380px;
     height: auto;
     margin: auto;
 }
@@ -74,11 +90,17 @@ img {
 .file {
     display: grid;
     height: 20px;
+    width: 100%;
     line-height: 20px;
-    grid-template-columns: auto 20px 20px;
+    text-align: right;
+    grid-template-columns: calc(100% - 90px) 30px 30px 30px;
     grid-template-rows:  1fr;
     grid-template-areas: 
-    "fileName showPic del"
+    "fileName getFile showPic del"
+}
+
+.getFile {
+    grid-area: getFile;
 }
 
 .fileName {
@@ -96,6 +118,7 @@ img {
 .showPic {
     grid-area: showPic;
 }
+
 .selected {
     background-color: blueviolet;
 }

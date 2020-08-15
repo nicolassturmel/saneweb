@@ -1,18 +1,23 @@
 <html><head>
     <script src="index.js"></script>
     <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div id=container>
-        <div id=files></div>
-        <div id=group>Group into PDF</div>
-        <div id=devices></div>
-        <div id=options></div>
-        <div id=configuration>
-            <div><span>filename :</span><input id="configuration-filename"></div>
-            <div><span>%d for current date YYYY-MM-DD<br>%i for increment, next: </span><input id="configuration-increment"></div>
+        <div id=inner2>
+            <div id=devices></div>
+            <div id=options></div>
+            <div id=configuration>
+                <div><span>filename :</span><input id="configuration-filename"></div>
+                <div><span>%d for current date YYYY-MM-DD<br>%i for increment, next: </span><input id="configuration-increment"></div>
+            </div>
+            <div id=scanbutton>Scan</div>
+            <div id=results></div>
         </div>
-        <div id=scanbutton>Scan</div>
-        <div id=results></div>
+        <div if=inner1>
+            <div id=files></div>
+            <div id=group>Group into PDF</div>
+        </div>
     </div>
 </body></html>
