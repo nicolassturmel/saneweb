@@ -1,5 +1,6 @@
 body {
     margin: 0;
+
 }
 
 #container {
@@ -27,6 +28,7 @@ body {
     "results results"
     "results results";
     margin-bottom: 40px;
+    margin-top: 8px;
 }
 
 #inner1 {
@@ -103,10 +105,10 @@ img {
     height: 20px;
     line-height: 20px;
     text-align: right;
-    grid-template-columns: auto 30px 30px 25px;
+    grid-template-columns: 30px auto 30px 25px;
     grid-template-rows:  1fr;
     grid-template-areas: 
-    "fileName getFile showPic del"
+    "del fileName getFile showPic"
 }
 
 .getFile {
@@ -118,13 +120,14 @@ img {
     grid-area: fileName;
     min-width: 30px;
     overflow: hidden;
+    text-align: left;
     white-space: pre;
 }
 
 .del {
     grid-area: del;
     color: red;
-    text-align: right;
+    text-align: left;
 }
 
 .showPic {
