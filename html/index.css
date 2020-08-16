@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 #container {
     display: flex;
     flex-flow: row wrap;
@@ -6,9 +10,8 @@
     color: white;
     background-color: gray;
     text-align: center;
-    width: 100%;
-    min-width: 400px;
-    max-width: 700px;
+    max-width: 900px;
+    width: 100vw;
 }
 
 
@@ -28,8 +31,16 @@
 
 #inner1 {
     display: grid;
-    min-width: 200px;
-    width: 100%;
+    flex-grow: 1;      /* it can grow */
+    flex-shrink: 1;    /* it can shrink */
+    flex-basis: 200px; /* arbitrary depending on design */
+    min-width: 200px;  /* equal to flex-basis */
+    max-width: 40%;    /* (100% - margins)/number of boxes */
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 45px;
+    grid-template-areas: 
+    "files"
+    "group";
 }
 
 #files {
@@ -90,10 +101,9 @@ img {
 .file {
     display: grid;
     height: 20px;
-    width: 100%;
     line-height: 20px;
     text-align: right;
-    grid-template-columns: calc(100% - 90px) 30px 30px 30px;
+    grid-template-columns: auto 30px 30px 25px;
     grid-template-rows:  1fr;
     grid-template-areas: 
     "fileName getFile showPic del"
@@ -101,6 +111,7 @@ img {
 
 .getFile {
     grid-area: getFile;
+    text-align: right;
 }
 
 .fileName {
@@ -113,10 +124,12 @@ img {
 .del {
     grid-area: del;
     color: red;
+    text-align: right;
 }
 
 .showPic {
     grid-area: showPic;
+    text-align: right;
 }
 
 .selected {

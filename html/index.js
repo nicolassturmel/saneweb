@@ -84,7 +84,7 @@ var listFiles = (inc,deleteF) => {
              get.className = "getFile"
               fn.appendChild(get)
             let del = document.createElement("span")
-            del.innerHTML = " X"
+            del.innerHTML = "X"
             del.className = "del"
             del.onclick = () => { console.log("Delete",f) ; listFiles(null,f) }
             fn.appendChild(del)
