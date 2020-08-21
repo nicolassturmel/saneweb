@@ -85,6 +85,10 @@ img {
     margin: 10px;
 }
 
+#scanbutton:hover {
+    background-color: darkgray;
+}
+
 #options {
     grid-area: options;
     display: flex;
